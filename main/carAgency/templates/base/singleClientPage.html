@@ -1,0 +1,37 @@
+{%extends 'main.html'%} {%block content%}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div
+      class="col-lg-4 col-md-6 border border-1 p-5 d-flex flex-column gap-3 rounded-4"
+    >
+      <div class="action d-flex justify-content-end">
+        <a href="{%url 'editClient' client.id%}">
+          <i class="bi bi-pen text-black"></i>
+        </a>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Name:</label>
+        <p>{{client.name}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Email:</label>
+        <p>{{client.email}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Address:</label>
+        <p>{{client.address}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Age:</label>
+        <p>{{client.age}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Job:</label>
+        <p>{{client.Job}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

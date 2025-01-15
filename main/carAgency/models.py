@@ -18,6 +18,7 @@ class Client(models.Model):
     age = models.IntegerField()
     address = models.CharField(max_length=200)
     job = models.CharField(max_length=200)
+    cars = models.ForeignKey(Car, related_name="cars", on_delete=models.CASCADE, default = None, blank = True)
     
     def __str__(self):
         return self.name

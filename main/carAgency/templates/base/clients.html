@@ -29,6 +29,7 @@
           <th scope="col">Email</th>
           <th scope="col">Age</th>
           <th scope="col">Address</th>
+          <th scope="col">Car</th>
           <th scope="col">Job</th>
           <th scope="col">Actions</th>
         </tr>
@@ -43,8 +44,9 @@
           <th scope="row">#{{client.id}}</th>
           <td>{{client.name}}</td>
           <td>{{client.email}}</td>
-          <td>{{client.address}}</td>
           <td>{{client.age}}</td>
+          <td>{{client.address}}</td>
+          <td>{{client.cars}}</td>
           <td>{{client.job}}</td>
           <td>
             <div class="dropdown">
@@ -60,7 +62,7 @@
               <ul class="dropdown-menu">
                 <li>
                   <form
-                    action="{% url 'delete' client.id %}"
+                    action="{% url 'deleteClient' client.id %}"
                     method="POST"
                     onsubmit="event.stopPropagation();"
                   >
@@ -76,7 +78,7 @@
                 </li>
                 <li>
                   <a
-                    href="{% url 'editCar' client.id%}"
+                    href="{% url 'editClient' client.id%}"
                     class="dropdown-item"
                     onclick="event.stopPropagation()"
                     type="submit"

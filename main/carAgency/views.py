@@ -40,7 +40,7 @@ def updateCarView(request, id):
         if form.is_valid():
             form.save()
             return redirect('home')
-    return render(request, 'base/updateCar.html', {'car': car, 'form': form})
+    return render(request, 'base/updateForm.html', {'car': car, 'form': form})
 
 
 def clientView(request):
@@ -55,3 +55,30 @@ def createClientView(request):
             form.save()
             return redirect('clients')
     return render(request, 'base/createClients.html', {'form': form})
+
+def deleteClientView(request, id):
+    if request.method == 'POST':
+        try:
+            car = Client.objects.get(id=id)
+            car.delete()
+            return redirect('clients')
+        except:
+            return render(request, 'base/cars.html')
+
+def getClientView(request, id):
+    try:
+        client = Client.objects.get(id=id)
+        print(client)
+        return render(request, 'base/singleClientPage.html', {'client': client})
+    except:
+        return redirect('clients')
+    
+def updateClientView(request, id):
+    client = Client.objects.get(id=id)
+    form = CreateClientForm(instance=client)
+    if request.method == 'POST':
+        form = CreateClientForm(request.POST, instance=client)
+        if form.is_valid():
+            form.save()
+            return redirect('clients')
+    return render(request, 'base/updateForm.html', {'form': form})

@@ -9,4 +9,7 @@ urlpatterns = [
     path('car/<int:id>/edit/', views.updateCarView, name='editCar'),
     path('clients/', views.clientView, name='clients'),
     path('create-client/', views.createClientView, name='createClient'),
+    path('delete-client/<int:id>/', views.deleteClientView, name='deleteClient'),
+    path('client/<int:id>/', views.getClientView, name='singleClientPage'),
+    path('client/<int:id>/edit', views.updateClientView, name='editClient'),
 ]
