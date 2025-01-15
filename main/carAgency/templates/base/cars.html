@@ -1,0 +1,94 @@
+{% extends "main.html" %} {%block content%}
+<div class="container-fluid">
+  <div class="header d-flex justify-content-between">
+    <div class="text">
+      <h3>Manage Cars</h3>
+      <p class="text-muted">Create delete and update cars</p>
+    </div>
+    <div class="action px-5">
+      <a class="btn btn-primary" href="{%url 'create'%}">Create car</a>
+    </div>
+  </div>
+  <form action="" method="POST">
+    <div class="search mb-2 d-flex gap-2">
+      <input
+        type="text"
+        class="form-control w-25"
+        placeholder="search for cars"
+        style="box-shadow: none"
+      />
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+  </form>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"># Id</th>
+          <th scope="col">Car title</th>
+          <th scope="col">Company</th>
+          <th scope="col">Model</th>
+          <th scope="col">Km</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for car in cars%}
+        <tr
+          style="cursor: pointer"
+          onclick="window.location.href = `/car/{{car.id}}`"
+          onmousedown="event.stopPropagation()"
+        >
+          <th scope="row">#{{car.id}}</th>
+          <td>{{car.title}}</td>
+          <td>{{car.company}}</td>
+          <td>{{car.model}}</td>
+          <td>{{car.km}}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                class="btn"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                onclick="event.stopPropagation()"
+              >
+                <i class="bi bi-three-dots-vertical text-black"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <form
+                    action="{% url 'delete' car.id %}"
+                    method="POST"
+                    onsubmit="event.stopPropagation();"
+                  >
+                    {% csrf_token %}
+                    <button
+                      class="dropdown-item text-danger"
+                      onclick="event.stopPropagation()"
+                      type="submit"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'editCar' car.id%}"
+                    class="dropdown-item"
+                    onclick="event.stopPropagation()"
+                    type="submit"
+                  >
+                    Edit
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+</div>
+{%endblock%}

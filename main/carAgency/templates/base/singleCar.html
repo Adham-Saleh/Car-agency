@@ -1,0 +1,33 @@
+{%extends 'main.html'%} {%block content%}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div
+      class="col-lg-4 col-md-6 border border-1 p-5 d-flex flex-column gap-3 rounded-4"
+    >
+      <div class="action d-flex justify-content-end">
+        <a href="{%url 'editCar' car.id%}">
+          <i class="bi bi-pen text-black"></i>
+        </a>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Title:</label>
+        <p>{{car.title}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Company:</label>
+        <p>{{car.company}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">Model:</label>
+        <p>{{car.model}}</p>
+      </div>
+      <div class="title">
+        <label for="" class="fw-bold">km:</label>
+        <p>{{car.km}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

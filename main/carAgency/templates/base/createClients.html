@@ -1,0 +1,25 @@
+{%extends 'main.html'%} {% block content %}
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-4">
+      <form action="" method="POST" class="">
+        <h3>Create client</h3>
+        <p class="text-muted">create a client</p>
+        {%csrf_token%} {%for field in form%}
+        <label for="" class="form-label">{{field.label}}</label>
+        <div class="form-control">{{field}}</div>
+        {%endfor%}
+        <div
+          class="action d-flex justify-content-end align-items-center mt-4 w-100"
+        >
+          <button type="button" class="btn btn-outline-secondary me-2">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-success">Create Client</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

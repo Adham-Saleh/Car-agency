@@ -1,0 +1,103 @@
+{% extends "main.html" %} {%block content%}
+<div class="container-fluid">
+  <div class="header d-flex justify-content-between">
+    <div class="text">
+      <h3>Manage Clients</h3>
+      <p class="text-muted">Create delete and update clients</p>
+    </div>
+    <div class="action px-5">
+      <a class="btn btn-primary" href="{%url 'createClient'%}">Create client</a>
+    </div>
+  </div>
+  <form action="" method="POST">
+    <div class="search mb-2 d-flex gap-2">
+      <input
+        type="text"
+        class="form-control w-25"
+        placeholder="search for cars"
+        style="box-shadow: none"
+      />
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+  </form>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"># Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Address</th>
+          <th scope="col">Job</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%if clients%} {%for client in clients%}
+        <tr
+          style="cursor: pointer"
+          onclick="window.location.href = `/client/{{client.id}}`"
+          onmousedown="event.stopPropagation()"
+        >
+          <th scope="row">#{{client.id}}</th>
+          <td>{{client.name}}</td>
+          <td>{{client.email}}</td>
+          <td>{{client.address}}</td>
+          <td>{{client.age}}</td>
+          <td>{{client.job}}</td>
+          <td>
+            <div class="dropdown">
+              <button
+                class="btn"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                onclick="event.stopPropagation()"
+              >
+                <i class="bi bi-three-dots-vertical text-black"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <form
+                    action="{% url 'delete' client.id %}"
+                    method="POST"
+                    onsubmit="event.stopPropagation();"
+                  >
+                    {% csrf_token %}
+                    <button
+                      class="dropdown-item text-danger"
+                      onclick="event.stopPropagation()"
+                      type="submit"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'editCar' client.id%}"
+                    class="dropdown-item"
+                    onclick="event.stopPropagation()"
+                    type="submit"
+                  >
+                    Edit
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        {%endfor%} {%else%}
+        <tr>
+          <td colspan="7" class="text-center p-5 algin-content-center">
+            <!-- <i class="bi bi-slash-circle h3"></i> -->
+            <span>No data</span>
+          </td>
+        </tr>
+        {%endif%}
+      </tbody>
+    </table>
+  </div>
+</div>
+{%endblock%}
